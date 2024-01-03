@@ -9,7 +9,7 @@
 
 void check_args(int expected_args_num, int actual_args_num);
 
-void check_file_exists(const FILE *todo);
+void check_file_exists(const FILE *file_ptr, const char *filename);
 
 void generate_random_ID(char random_id[]);
 
@@ -28,10 +28,9 @@ void check_args(int expected_args_num, int actual_args_num) {
 
 }
 
-// TODO: add file name as formal argument
-void check_file_exists(const FILE *todo) {
-    if (todo == NULL) {
-        print_error(TODO_TXT_FILE_NOT_FOUND_ERROR);
+void check_file_exists(const FILE *file_ptr, const char *filename) {
+    if (file_ptr == NULL) {
+        printf("elephant: %s not found.\n", filename);
         exit(EXIT_FAILURE);
     }
 }
