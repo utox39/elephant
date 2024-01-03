@@ -13,9 +13,6 @@ void print_error(int errno) {
         case UNKNOWN_COMMAND_ERROR:
             printf("elephant: unknown command.\n");
             break;
-        case TODO_TXT_FILE_NOT_FOUND_ERROR:
-            printf("elephant: todo.txt file not found.\n");
-            break;
         case TODO_ID_NOT_FOUND_ERROR:
             printf("elephant: todo_id not found.\n");
             break;
