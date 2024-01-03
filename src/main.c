@@ -22,14 +22,17 @@ char *todo_path = NULL;
 
 
 int main(int argc, const char **argv) {
+    // Get user home directory via environment variable
     const char *home = getenv("HOME");
 
     unsigned long todo_path_len = strlen(home) + strlen("/.todo.txt");
 
+    // task file path
     todo_path = (char *) malloc(todo_path_len * sizeof(char));
     strncpy(todo_path, home, strlen(home));
     strncat(todo_path, "/.todo.txt", todo_path_len);
 
+    // Handle command line arguments
     handler(argc, argv);
 
     free(todo_path);
@@ -40,6 +43,7 @@ int main(int argc, const char **argv) {
 void handler(int argc, const char **arg) {
     check_args(argc);
 
+    // Handle command line arguments
     if (!strcmp(arg[1], "add")) {
         write_todo(arg[2]);
     } else if (!strcmp(arg[1], "rm")) {
@@ -58,6 +62,7 @@ void write_todo(const char *content) {
     check_file_exists(todo);
     if (content) {
         char random_id[ID_SIZE];
+        // Generate a random for the new task
         generate_random_ID(random_id);
         fprintf(todo, "%s: %s\n", random_id, content);
     }
@@ -82,11 +87,10 @@ void delete_todo(const char *todo_id) {
     int line_count = 0;
     unsigned long tmp_filepath_len = strlen("/.temp.tmp") + strlen(home);
 
+    // tmp file path
     tmp_filepath = (char *) malloc(tmp_filepath_len * sizeof(char));
-
     strncpy(tmp_filepath, home, strlen(home));
     strncat(tmp_filepath, "/.temp.tmp", tmp_filepath_len);
-
     if (tmp_filepath == NULL) {
         printf("elephant: ~/.temp.tmp not created\n");
         exit(EXIT_FAILURE);
@@ -95,13 +99,16 @@ void delete_todo(const char *todo_id) {
     todo = fopen(todo_path, "r");
     check_file_exists(todo);
 
+    // Find the line number of the task to be deleted
     todo_line = find_todo(todo, todo_id);
     fclose(todo);
+
     if (todo_line == 0) {
         print_error(TODO_ID_NOT_FOUND_ERROR);
         exit(EXIT_FAILURE);
     }
 
+    // Create a temporary file where tasks are rewritten without the one to be deleted
     tmp_file = fopen(tmp_filepath, "w");
     if (tmp_file == NULL) {
         printf("elephant: %s not found\n", tmp_filepath);
@@ -114,6 +121,7 @@ void delete_todo(const char *todo_id) {
     while ((fgets(buffer, BUFFER_SIZE, todo)) != NULL) {
         line_count++;
 
+        // If line count matches the task line to delete, it replaces that line with an empty string
         if (line_count == todo_line) {
             fputs("", tmp_file);
         } else {
@@ -124,10 +132,10 @@ void delete_todo(const char *todo_id) {
     fclose(todo);
     fclose(tmp_file);
 
-    /* Delete original file */
+    // Delete original file
     remove(todo_path);
 
-    /* Rename temporary file as original file */
+    // Rename temporary file as original file
     rename(tmp_filepath, todo_path);
 
     printf("%s successfully deleted", todo_id);
@@ -158,6 +166,7 @@ void print_todo_list(void) {
     todo = fopen(todo_path, "r");
     check_file_exists(todo);
 
+    // Print the task list
     while (fgets(buffer, sizeof(buffer), todo)) {
         printf("%s\n", buffer);
     }
