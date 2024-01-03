@@ -6,6 +6,9 @@
 #include "errors.h"
 
 #define BUFFER_SIZE 1024
+#define ADD_EXPECTED_ARGS_NUMBER 3
+#define RM_EXPECTED_ARGS_NUMBER 3
+#define LIST_EXPECTED_ARGS_NUMBER 2
 
 void handler(int argc, const char **arg);
 
@@ -41,14 +44,15 @@ int main(int argc, const char **argv) {
 }
 
 void handler(int argc, const char **arg) {
-    check_args(argc);
-
     // Handle command line arguments
     if (!strcmp(arg[1], "add")) {
+        check_args(ADD_EXPECTED_ARGS_NUMBER, argc);
         write_todo(arg[2]);
     } else if (!strcmp(arg[1], "rm")) {
+        check_args(RM_EXPECTED_ARGS_NUMBER, argc);
         delete_todo(arg[2]);
     } else if (!strcmp(arg[1], "list")) {
+        check_args(LIST_EXPECTED_ARGS_NUMBER, argc);
         print_todo_list();
     } else {
         print_error(UNKNOWN_COMMAND_ERROR);

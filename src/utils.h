@@ -6,9 +6,8 @@
 #include "errors.h"
 
 #define ID_SIZE 5
-#define NUMBER_OF_ARGS 3
 
-void check_args(int argc);
+void check_args(int expected_args_num, int actual_args_num);
 
 void check_file_exists(const FILE *todo);
 
@@ -16,16 +15,15 @@ void generate_random_ID(char random_id[]);
 
 unsigned int generate_random_number(void);
 
-void check_args(int argc) {
-    if (argc < NUMBER_OF_ARGS) {
+void check_args(int expected_args_num, int actual_args_num) {
+    if (actual_args_num < expected_args_num) {
         print_error(TOO_FEW_ARGS_ERROR);
         //TODO: create help_function
-        exit(EXIT_FAILURE);
-    } else if (argc > NUMBER_OF_ARGS) {
+    } else if (actual_args_num > expected_args_num) {
         print_error(TOO_MANY_ARGS_ERROR);
         //TODO: create help_function
-        exit(EXIT_FAILURE);
     }
+    exit(EXIT_FAILURE);
 }
 
 // TODO: add file name as formal argument
