@@ -4,6 +4,7 @@
 
 #include "utils.h"
 #include "errors.h"
+#include "helper.h"
 
 #define BUFFER_SIZE 1024
 #define ADD_EXPECTED_ARGS_NUMBER 3
@@ -54,6 +55,8 @@ void handler(int argc, const char **arg) {
     } else if (!strcmp(arg[1], "list")) {
         check_args(LIST_EXPECTED_ARGS_NUMBER, argc);
         print_todo_list();
+    } else if (!strcmp(arg[1], "help")) {
+        help();
     } else {
         print_error(UNKNOWN_COMMAND_ERROR);
         exit(EXIT_FAILURE);
