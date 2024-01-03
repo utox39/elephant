@@ -174,8 +174,11 @@ void print_todo_list(void) {
     check_file_exists(todo);
 
     // Print the task list
+    printf("TODO:\n");
+    printf("ID  |Task Description\n");
+    printf("----------------------\n");
     while (fgets(buffer, sizeof(buffer), todo)) {
-        printf("%s\n", buffer);
+        printf("%s", buffer);
     }
 
     fclose(todo);
