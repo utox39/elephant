@@ -66,7 +66,7 @@ void handler(int argc, const char **arg) {
 void write_todo(const char *content) {
     FILE *todo = NULL;
     todo = fopen(todo_path, "a");
-    check_file_exists(todo);
+    check_file_exists(todo, todo_path);
     if (content) {
         char random_id[ID_SIZE];
         // Generate a random for the new task
@@ -104,7 +104,7 @@ void delete_todo(const char *todo_id) {
     }
 
     todo = fopen(todo_path, "r");
-    check_file_exists(todo);
+    check_file_exists(todo, todo_path);
 
     // Find the line number of the task to be deleted
     todo_line = find_todo(todo, todo_id);
@@ -117,13 +117,10 @@ void delete_todo(const char *todo_id) {
 
     // Create a temporary file where tasks are rewritten without the one to be deleted
     tmp_file = fopen(tmp_filepath, "w");
-    if (tmp_file == NULL) {
-        printf("elephant: %s not found\n", tmp_filepath);
-        exit(EXIT_FAILURE);
-    }
+    check_file_exists(tmp_file, tmp_filepath);
 
     todo = fopen(todo_path, "r");
-    check_file_exists(todo);
+    check_file_exists(todo, todo_path);
 
     while ((fgets(buffer, BUFFER_SIZE, todo)) != NULL) {
         line_count++;
@@ -171,7 +168,7 @@ void print_todo_list(void) {
     char buffer[BUFFER_SIZE];
 
     todo = fopen(todo_path, "r");
-    check_file_exists(todo);
+    check_file_exists(todo, todo_path);
 
     // Print the task list
     printf("TODO:\n");
