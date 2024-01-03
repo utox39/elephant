@@ -15,6 +15,8 @@ void write_todo(const char *content);
 
 void delete_todo(const char *todo_id);
 
+void print_todo_list(void);
+
 
 char *todo_path = NULL;
 
@@ -42,6 +44,8 @@ void handler(int argc, const char **arg) {
         write_todo(arg[2]);
     } else if (!strcmp(arg[1], "rm")) {
         delete_todo(arg[2]);
+    } else if (!strcmp(arg[1], "list")) {
+        print_todo_list();
     } else {
         print_error(UNKNOWN_COMMAND_ERROR);
         exit(EXIT_FAILURE);
@@ -145,5 +149,18 @@ int find_todo(FILE *todo, const char *todo_id) {
     }
 
     return 0;
+}
 
+void print_todo_list(void) {
+    FILE *todo = NULL;
+    char buffer[BUFFER_SIZE];
+
+    todo = fopen(todo_path, "r");
+    check_file_exists(todo);
+
+    while (fgets(buffer, sizeof(buffer), todo)) {
+        printf("%s\n", buffer);
+    }
+
+    fclose(todo);
 }
