@@ -1,8 +1,8 @@
 #include <stdio.h>
 
-void help();
+void help(void);
 
-void help() {
+void help(void) {
     printf("usage: elephant [COMMAND] [VALUE]\n\n"
            "Task Manager Program: an elephant never forgets\n\n"
            "commands:\n"
