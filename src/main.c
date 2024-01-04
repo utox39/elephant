@@ -33,6 +33,10 @@ int main(int argc, const char **argv) {
 
     // task file path
     todo_path = (char *) malloc(todo_path_len * sizeof(char));
+    if (todo_path == NULL) {
+        fprintf(stderr, "Allocation for todo_path failed.\n");
+        exit(EXIT_FAILURE);
+    }
     strncpy(todo_path, home, strlen(home));
     strncat(todo_path, "/.todo.txt", todo_path_len);
 
