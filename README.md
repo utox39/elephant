@@ -1,5 +1,7 @@
 # Elephant
 
+> This project is under active development
+
 - [Description](#description)
 - [Requirements](#requirements)
 - [Installation](#installation)
