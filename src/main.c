@@ -94,7 +94,7 @@ void delete_todo(const char *todo_id) {
     }
 
     char *tmp_filepath = NULL;
-    int todo_line = 0;
+    int todo_line;
     int line_count = 0;
     unsigned long tmp_filepath_len = strlen("/.temp.tmp") + strlen(home);
 
