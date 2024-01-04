@@ -142,7 +142,7 @@ void delete_todo(const char *todo_id) {
     // Rename temporary file as original file
     rename(tmp_filepath, todo_path);
 
-    printf("%s successfully deleted", todo_id);
+    printf("%s successfully deleted\n", todo_id);
 
     free(tmp_filepath);
 }
