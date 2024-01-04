@@ -1,5 +1,8 @@
 #include <stdio.h>
 
+#ifndef HELPER_H
+#define HELPER_H
+
 void help(void);
 
 void help(void) {
@@ -20,3 +23,5 @@ void help(void) {
            "  elephant list\n"
     );
 }
+
+#endif

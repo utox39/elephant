@@ -5,6 +5,9 @@
 
 #include "errors.h"
 
+#ifndef UTILS_H
+#define UTILS_H
+
 #define ID_SIZE 5
 
 void check_args(int expected_args_num, int actual_args_num);
@@ -63,3 +66,5 @@ void generate_random_ID(char random_id[]) {
 
     random_id[ID_SIZE - 1] = '\0';
 }
+
+#endif
