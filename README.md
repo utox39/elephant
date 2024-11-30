@@ -1,6 +1,7 @@
 # Elephant
 
-> This project is under active development
+[WARNING]
+> THIS PROJECT IS NO LONGER SUPPORTED.
 
 - [Description](#description)
 - [Requirements](#requirements)
