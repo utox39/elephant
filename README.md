@@ -1,6 +1,6 @@
 # Elephant
 
-[WARNING]
+> [!WARNING]
 > THIS PROJECT IS NO LONGER SUPPORTED.
 
 - [Description](#description)
